@@ -15,7 +15,7 @@ cmake  -DCMAKE_TOOLCHAIN_FILE=arm-linux.cmake CMakeLists.txt
 make
 
 ```
-Note: PGO optimaze in file CMakeLists.txt.
+Note: PGO optimize in file CMakeLists.txt.
 
 # INFO mGBA
 
