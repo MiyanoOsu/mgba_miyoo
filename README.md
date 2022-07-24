@@ -6,7 +6,7 @@ Fork from: https://github.com/mgba-emu/mgba
 
 # How To Build Binary
 
-You will need a toolchain for miyoocfw, cmake, a distro linux base on debian 9 (ubuntu, ..etc).
+You will need a toolchain for miyoocfw, cmake, a distro linux base on debian 9 or newer (ubuntu, ..etc).
 
 In terminal:
 ```
