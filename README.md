@@ -2,7 +2,7 @@
 
 A build for miyoo devices using Q90/V90 keymaps
 
-Fork from: https://github.com/mgba-emu/mgba
+Base on mGBA v0.9.3
 
 # How To Build Binary
 
