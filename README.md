@@ -1,6 +1,7 @@
 # mGba_miyoo
 
 A build for miyoo devices using Q90/V90 keymaps
+
 Fork from: https://github.com/mgba-emu/mgba
 
 # How To Build Binary
@@ -16,7 +17,7 @@ make
 ```
 
 
-#INFO mGBA
+# INFO mGBA
 ====
 
 mGBA is an emulator for running Game Boy Advance games. It aims to be faster and more accurate than many existing Game Boy Advance emulators, as well as adding features that other emulators lack. It also supports Game Boy and Game Boy Color games.
