@@ -6,7 +6,7 @@ Base on mGBA v0.9.3
 
 # How To Build Binary
 
-You will need a toolchain for miyoocfw, cmake, a distro linux base on debian 9 or newer (ubuntu, ..etc).
+You will need a toolchain for miyoocfw, cmake, make, a distro linux base on debian 9 or newer (ubuntu, ..etc).
 
 In terminal:
 ```
