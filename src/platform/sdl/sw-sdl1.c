@@ -77,7 +77,7 @@ void mSDLSWRunloop(struct mSDLRenderer* renderer, void* user) {
 		if (mCoreSyncWaitFrameStart(&context->impl->sync)) {
 #ifdef USE_PIXMAN
 			if (renderer->ratio > 1) {
-				pixman_image_composite32(PIXMAN_OP_SRC, renderer->pix, 0, renderer->screenpix,
+				pixman_image_composite16(PIXMAN_OP_SRC, renderer->pix, 0, renderer->screenpix,
 				    0, 0, 0, 0, 0, 0,
 				    renderer->viewportWidth, renderer->viewportHeight);
 			}
