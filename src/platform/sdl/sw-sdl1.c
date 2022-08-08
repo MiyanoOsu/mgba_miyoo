@@ -55,7 +55,7 @@ bool mSDLSWInit(struct mSDLRenderer* renderer) {
 		pixman_transform_init_identity(&transform);
 		pixman_transform_scale(0, &transform, pixman_double_to_fixed(renderer->ratio), pixman_double_to_fixed(renderer->ratio));
 		pixman_image_set_transform(renderer->pix, &transform);
-		pixman_image_set_filter(renderer->pix, PIXMAN_FILTER_BILINEAR, 0, 0);
+		pixman_image_set_filter(renderer->pix, PIXMAN_FILTER_GOOD, 0, 0);
 #else
 		return false;
 #endif
