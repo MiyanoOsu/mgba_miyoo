@@ -255,9 +255,9 @@ void mCoreConfigDirectory(char* out, size_t outLength) {
 		return;
 	}
 	char* home = getenv("HOME");
-	snprintf(out, outLength, "%s/.config", home);
+	snprintf(out, outLength, "%s/.mgba", home);
 	mkdir(out, 0755);
-	snprintf(out, outLength, "%s/.config/%s", home, binaryName);
+	snprintf(out, outLength, "%s/.mgba/save", home);
 	mkdir(out, 0755);
 #endif
 }
