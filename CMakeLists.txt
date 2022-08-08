@@ -268,7 +268,7 @@ if(BUILD_RASPI)
 	set(BUILD_GL OFF CACHE BOOL "OpenGL not supported" FORCE)
 endif()
 
-if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm.*")
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "Arm")
 	enable_language(ASM)
 endif()
 
