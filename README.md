@@ -14,7 +14,6 @@ cd /where/the/source/code/place
 make -f Makefile.miyoo
 
 ```
-Note: PGO optimize in file CMakeLists.txt.
 
 # INFO mGBA
 
