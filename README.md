@@ -11,9 +11,7 @@ You will need a toolchain for miyoocfw, cmake, make, a distro linux base on debi
 In terminal:
 ```
 cd /where/the/source/code/place
-./clean  #clean all generated files
-cmake  -DCMAKE_TOOLCHAIN_FILE=arm-linux.cmake CMakeLists.txt
-make
+make -f Makefile.miyoo
 
 ```
 Note: PGO optimize in file CMakeLists.txt.
