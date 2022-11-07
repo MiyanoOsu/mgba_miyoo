@@ -444,6 +444,9 @@ void mCoreConfigMap(const struct mCoreConfig* config, struct mCoreOptions* opts)
 
 void mCoreConfigLoadDefaults(struct mCoreConfig* config, const struct mCoreOptions* opts) {
 	ConfigurationSetValue(&config->defaultsTable, 0, "bios", opts->bios);
+	ConfigurationSetValue(&config->defaultsTable, 0, "savegamePath", opts->savegamePath);
+	ConfigurationSetValue(&config->defaultsTable, 0, "savestatePath", opts->savestatePath);
+	ConfigurationSetValue(&config->defaultsTable, 0, "screenshotPath", opts->screenshotPath);
 	ConfigurationSetValue(&config->defaultsTable, 0, "shader", opts->shader);
 	ConfigurationSetIntValue(&config->defaultsTable, 0, "skipBios", opts->skipBios);
 	ConfigurationSetIntValue(&config->defaultsTable, 0, "useBios", opts->useBios);
