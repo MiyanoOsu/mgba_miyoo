@@ -254,10 +254,13 @@ void mCoreConfigDirectory(char* out, size_t outLength) {
 		mkdir(out, 0755);
 		return;
 	}
-	char* home = getenv("HOME");
+	char* home = "/mnt";
+	
 	snprintf(out, outLength, "%s/.mgba", home);
 	mkdir(out, 0755);
 	snprintf(out, outLength, "%s/.mgba/save", home);
+	mkdir(out, 0755);
+	snprintf(out, outLength, "%s/.mgba/screenshot", home);
 	mkdir(out, 0755);
 #endif
 }
