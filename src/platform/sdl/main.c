@@ -61,9 +61,9 @@ int main(int argc, char** argv) {
 		.videoSync = false,
 		.audioSync = true,
 		.volume = 0x100,
-		.savegamePath=".mgba/save",
-		.savestatePath=".mgba/save",
-		.screenshotPath=".mgba/screenshot"
+		.savegamePath="/mnt/.mgba/save",
+		.savestatePath="/mnt/.mgba/save",
+		.screenshotPath="/mnt/.mgba/screenshot"
 	};
 
 	struct mArguments args;
