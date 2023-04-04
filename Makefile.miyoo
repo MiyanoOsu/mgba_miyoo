@@ -101,6 +101,7 @@ OBJS = src/version.o     \
      src/feature/thread-proxy.o     \
      src/feature/commandline.o     \
      src/gb/audio.o		\
+     src/platform/sdl/menu.o	\
      src/platform/sdl/main.o   \
      src/platform/sdl/sw-sdl1.o   \
      src/platform/sdl/sdl-events.o   \
@@ -110,7 +111,7 @@ CFLAGS = -I$(INCLUDEDIR) -Iinclude -Isrc -O2 -march=armv5te -mtune=arm926ej-s -s
 	 -I$(INCLUDEDIR)/pixman-1 -DCOLOR_16_BIT -DCOLOR_5_6_5 -DUSE_PNG=1 -DUSE_ZLIB=1 -DUSE_PIXMAN=1 -DM_CORE_GBA=1 	\
 	 -DUSE_PTHREADS=1 -DHAVE_STRNDUP -DHAVE_STRDUP -I$(INCLUDEDIR)/SDL -D_GNU_SOURCE=1 -D_REENTRANT
 
-LDFLAGS = -L$(LIBDIR) -flto -lz -lm -static-libgcc -lgcc -lpng16 -lpixman-1 -lpthread -Wl,-rpath,$(LIBDIR) -lSDL -lpthread
+LDFLAGS = -L$(LIBDIR) -flto -lz -lm -static-libgcc -lgcc -lpng16 -lSDL_ttf -lpixman-1 -lpthread -Wl,-rpath,$(LIBDIR) -lSDL -lpthread
 
 TARGET = bin/mgba.dge
 
