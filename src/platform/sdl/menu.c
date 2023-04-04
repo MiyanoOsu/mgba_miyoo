@@ -63,9 +63,10 @@ int parsekey(unsigned long code, int repeat)
 }
 
 void drawText (SDL_Surface* screen, char* string, int x, int y)
-{
-
-	TTF_Font* font = TTF_OpenFont("/home/emachines/mgba_miyoo/DejaVuSans.ttf", 16);
+{	
+	
+	//change patch to font depend on where the font place
+	TTF_Font* font = TTF_OpenFont("../mgba_miyoo/DejaVuSans.ttf", 16);
 
 	SDL_Color textColor = { 255, 255, 255 };
 
