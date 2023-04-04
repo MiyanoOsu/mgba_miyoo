@@ -67,6 +67,7 @@ void drawText (SDL_Surface* screen, char* string, int x, int y)
 	
 	//change patch to font depend on where the font place
 	TTF_Font* font = TTF_OpenFont("../mgba_miyoo/DejaVuSans.ttf", 16);
+	if(!font) {printf("TTF_OpenFont: %s  \nPlease check mgba_miyoo/src/platform/sdl/menu.c\n", TTF_GetError());}
 
 	SDL_Color textColor = { 255, 255, 255 };
 
