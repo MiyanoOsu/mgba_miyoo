@@ -479,7 +479,8 @@ static void _mSDLHandleKeypress(struct mCoreThread* context, struct mSDLPlayer* 
 			return;
 
 		case SDLK_RCTRL:
-			mCoreThreadEnd(context);
+			mCoreThreadPause(context);
+			RunMenu(context);
 			return;
 
 		default:
