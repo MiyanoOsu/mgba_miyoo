@@ -83,7 +83,7 @@ void drawText (SDL_Surface* screen, char* string, int x, int y)
 
 
 char *menu[] = {"Resume","Save state","Load state","Screenshot","Exit"};
-char *slot[] = {"Slot 1","Slot 2","Slot 3","Slot 4","Slot 5","Slot 7","Slot 8","Slot 9"};
+char *slot[] = {"Slot 1","Slot 2","Slot 3","Slot 4","Slot 5","Slot 6","Slot 7","Slot 8","Slot 9"};
 
 
 void RunMenu(struct mCoreThread* context) {
@@ -107,8 +107,8 @@ void RunMenu(struct mCoreThread* context) {
 				if(parsekey(SDLK_UP,0)) index-=1;
 				if(parsekey(SDLK_DOWN,0)) index+=1;
 				if(parsekey(SDLK_LALT,0)) sl=index;
-				if(index <0) index=7;
-				if(index >7) index=0;
+				if(index <0) index=8;
+				if(index >8) index=0;
 
 				switch(sl){
 					case 0:
@@ -127,7 +127,7 @@ void RunMenu(struct mCoreThread* context) {
 						break;
 				}
 
-				for(j=0,k=40;j<8;j++,k+=18) {drawText(screen, slot[j],60,k);}
+				for(j=0,k=40;j<9;j++,k+=18) {drawText(screen, slot[j],60,k);}
 				drawText(screen,"*",50,index*18+40);
 			}		
 
