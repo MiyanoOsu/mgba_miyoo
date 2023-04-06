@@ -203,7 +203,7 @@ static bool _vfdSync(struct VFile* vf, void* buffer, size_t size) {
 #ifdef __HAIKU__
 	futimens(vfd->fd, NULL);
 #else
-	futimesat(vfd->fd, NULL, NULL);
+	utimes(vfd->fd, NULL);
 #endif
 	if (buffer && size) {
 		return msync(buffer, size, MS_ASYNC) == 0;
