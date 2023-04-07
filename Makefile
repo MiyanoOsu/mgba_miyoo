@@ -37,7 +37,6 @@ OBJS = src/version.o     \
      src/gba/renderers/cache-set.o     \
      src/gba/renderers/software-bg.o     \
      src/gba/renderers/video-software.o     \
-     src/gba/renderers/gl.o     \
      src/gba/serialize.o     \
      src/gba/extra/battlechip.o     \
      src/gba/extra/proxy.o     \
