@@ -12,6 +12,7 @@
 static bool mSDLSWInit(struct mSDLRenderer* renderer);
 static void mSDLSWRunloop(struct mSDLRenderer* renderer, void* user);
 static void mSDLSWDeinit(struct mSDLRenderer* renderer);
+SDL_Surface* surface;
 
 void mSDLSWCreate(struct mSDLRenderer* renderer) {
 	renderer->init = mSDLSWInit;
@@ -29,7 +30,7 @@ bool mSDLSWInit(struct mSDLRenderer* renderer) {
 
 	unsigned width, height;
 	renderer->core->desiredVideoDimensions(renderer->core, &width, &height);
-	SDL_Surface* surface = SDL_GetVideoSurface();
+	surface = SDL_GetVideoSurface();
 	SDL_LockSurface(surface);
 
 	if (renderer->ratio == 1) {
@@ -67,7 +68,7 @@ bool mSDLSWInit(struct mSDLRenderer* renderer) {
 void mSDLSWRunloop(struct mSDLRenderer* renderer, void* user) {
 	struct mCoreThread* context = user;
 	SDL_Event event;
-	SDL_Surface* surface = SDL_GetVideoSurface();
+	surface = SDL_GetVideoSurface();
 
 	while (mCoreThreadIsActive(context)) {
 		while (SDL_PollEvent(&event)) {
@@ -102,6 +103,6 @@ void mSDLSWDeinit(struct mSDLRenderer* renderer) {
 		pixman_image_unref(renderer->screenpix);
 #endif
 	}
-	SDL_Surface* surface = SDL_GetVideoSurface();
+	surface = SDL_GetVideoSurface();
 	SDL_UnlockSurface(surface);
 }
