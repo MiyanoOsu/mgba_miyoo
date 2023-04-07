@@ -58,7 +58,7 @@ int main(int argc, char** argv) {
 		.rewindEnable = true,
 		.rewindBufferCapacity = 600,
 		.audioBuffers = 2048,
-		.videoSync = false,
+		.videoSync = true,
 		.audioSync = false,
 		.volume = 0x100,
 		.savegamePath="/mnt/.mgba/save",
