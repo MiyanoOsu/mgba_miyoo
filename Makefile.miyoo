@@ -108,7 +108,7 @@ OBJS = src/version.o     \
 
 CFLAGS = -I$(INCLUDEDIR) -Iinclude -Isrc -O2 -march=armv5te -mtune=arm926ej-s -std=c99 -Wall -flto  -fomit-frame-pointer  \
 	 -I$(INCLUDEDIR)/pixman-1 -DCOLOR_16_BIT -DCOLOR_5_6_5 -DUSE_PNG=1 -DUSE_ZLIB=1 -DUSE_PIXMAN=1 -DM_CORE_GBA=1 	\
-	 -DUSE_PTHREADS=1 -DHAVE_STRNDUP -DHAVE_STRDUP -DHAVE_STRTOF_L -DHAVE_LOCALE -I$(INCLUDEDIR)/SDL -D_GNU_SOURCE=1 -D_REENTRANT
+	 -DUSE_PTHREADS=1 -DHAVE_STRNDUP -DHAVE_STRDUP -DHAVE_LOCALE_T -I$(INCLUDEDIR)/SDL -D_GNU_SOURCE=1 -D_REENTRANT
 
 LDFLAGS = -L$(LIBDIR) -flto -lz -lm -static-libgcc -lgcc -lpng16 -lSDL_ttf -lpixman-1 -lpthread -Wl,-rpath,$(LIBDIR) -lSDL -lpthread
 
