@@ -22,7 +22,7 @@ void mSDLSWCreate(struct mSDLRenderer* renderer) {
 
 bool mSDLSWInit(struct mSDLRenderer* renderer) {
 #ifdef COLOR_16_BIT
-	SDL_SetVideoMode(renderer->viewportWidth, renderer->viewportHeight, 16, SDL_DOUBLEBUF | SDL_HWSURFACE | (SDL_FULLSCREEN * renderer->player.fullscreen));
+	SDL_SetVideoMode(renderer->viewportWidth, renderer->viewportHeight, 16, SDL_HWSURFACE | (SDL_FULLSCREEN * renderer->player.fullscreen));
 #else
 	SDL_SetVideoMode(renderer->viewportWidth, renderer->viewportHeight, 32, SDL_DOUBLEBUF | SDL_HWSURFACE | (SDL_FULLSCREEN * renderer->player.fullscreen));
 #endif
