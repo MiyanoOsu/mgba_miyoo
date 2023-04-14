@@ -27,6 +27,7 @@ bool mSDLSWInit(struct mSDLRenderer* renderer) {
 	SDL_SetVideoMode(renderer->viewportWidth, renderer->viewportHeight, 32, SDL_DOUBLEBUF | SDL_HWSURFACE | (SDL_FULLSCREEN * renderer->player.fullscreen));
 #endif
 	SDL_WM_SetCaption(projectName, "");
+	SDL_ShowCursor(SDL_DISABLE);
 
 	unsigned width, height;
 	renderer->core->desiredVideoDimensions(renderer->core, &width, &height);
