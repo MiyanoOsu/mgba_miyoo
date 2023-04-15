@@ -1,11 +1,6 @@
 #include "menu.h"
 #include "sdl-events.h"
 
-#include <mgba/core/core.h>
-#include <mgba/core/input.h>
-#include <mgba/core/serialize.h>
-#include <mgba/core/thread.h>
-
 
 static int g_dirty = 1;
 static unsigned long g_key = 0, last_key;
