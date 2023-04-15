@@ -503,13 +503,6 @@ const struct Configuration* mCoreConfigGetOverridesConst(const struct mCoreConfi
 }
 
 void mCoreConfigFreeOpts(struct mCoreOptions* opts) {
-	free(opts->bios);
-	free(opts->shader);
-	free(opts->savegamePath);
-	free(opts->savestatePath);
-	free(opts->screenshotPath);
-	free(opts->patchPath);
-	free(opts->cheatsPath);
 	opts->bios = 0;
 	opts->shader = 0;
 	opts->savegamePath = 0;
