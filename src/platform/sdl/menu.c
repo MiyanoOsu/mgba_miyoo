@@ -1,9 +1,4 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <SDL.h>
-#include <SDL_ttf.h>
-
+#include "menu.h"
 #include "sdl-events.h"
 
 #include <mgba/core/core.h>
