@@ -4,6 +4,8 @@ A build for miyoo devices using Q90/V90 keymaps
 
 Base on mGBA v0.9.3
 
+*Note: This build run slowly on miyoo device, need a lot of work to make it run better (To Do: rebuild code and optimaze for arm).
+
 # How To Build Binary
 
 You will need a toolchain for miyoocfw, cmake, make, a distro linux base on debian 9 or newer (ubuntu, ..etc).
