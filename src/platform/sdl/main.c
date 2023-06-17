@@ -55,8 +55,8 @@ int main(int argc, char** argv) {
 	struct mCoreOptions opts = {
 		.useBios = true,
 		.bios="gba_bios.bin",
-		.rewindEnable = false,
-		.rewindBufferCapacity = 0,
+		.rewindEnable = true,
+		.rewindBufferCapacity = 600,
 		.audioBuffers = 2048,
 		.videoSync = false,
 		.audioSync = false,
