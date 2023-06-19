@@ -49,8 +49,8 @@ void GBASerialize(struct GBA* gba, struct GBASerializedState* state) {
 	STORE_32(gba->cpu->nextEvent, 0, &state->cpu.nextEvent);
 	for (i = 0; i < 6; ++i) {
 		int j;
-		for (j = 0; j < 7; ++j) {
-			STORE_32(gba->cpu->bankedRegisters[i][j], (i * 7 + j) * sizeof(gba->cpu->bankedRegisters[0][0]), state->cpu.bankedRegisters);
+		for (j = 0; j < 2; ++j) {
+			STORE_32(gba->cpu->bankedRegisters[i][j], (i * 2 + j) * sizeof(gba->cpu->bankedRegisters[0][0]), state->cpu.bankedRegisters);
 		}
 		STORE_32(gba->cpu->bankedSPSRs[i], i * sizeof(gba->cpu->bankedSPSRs[0]), state->cpu.bankedSPSRs);
 	}
@@ -148,8 +148,8 @@ bool GBADeserialize(struct GBA* gba, const struct GBASerializedState* state) {
 	LOAD_32(gba->cpu->nextEvent, 0, &state->cpu.nextEvent);
 	for (i = 0; i < 6; ++i) {
 		int j;
-		for (j = 0; j < 7; ++j) {
-			LOAD_32(gba->cpu->bankedRegisters[i][j], (i * 7 + j) * sizeof(gba->cpu->bankedRegisters[0][0]), state->cpu.bankedRegisters);
+		for (j = 0; j < 2; ++j) {
+			LOAD_32(gba->cpu->bankedRegisters[i][j], (i * 2 + j) * sizeof(gba->cpu->bankedRegisters[0][0]), state->cpu.bankedRegisters);
 		}
 		LOAD_32(gba->cpu->bankedSPSRs[i], i * sizeof(gba->cpu->bankedSPSRs[0]), state->cpu.bankedSPSRs);
 	}

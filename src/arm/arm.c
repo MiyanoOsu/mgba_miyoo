@@ -20,7 +20,8 @@ void ARMSetPrivilegeMode(struct ARMCore* cpu, enum PrivilegeMode mode) {
 	if (newBank != oldBank) {
 		// Switch banked registers
 		if (mode == MODE_FIQ || cpu->privilegeMode == MODE_FIQ) {
-			int oldFIQBank = oldBank == BANK_FIQ;
+			int oldBank = newBank == BANK_FIQ;
+			/*int oldFIQBank = oldBank == BANK_FIQ;
 			int newFIQBank = newBank == BANK_FIQ;
 			cpu->bankedRegisters[oldFIQBank][2] = cpu->gprs[8];
 			cpu->bankedRegisters[oldFIQBank][3] = cpu->gprs[9];
@@ -31,7 +32,7 @@ void ARMSetPrivilegeMode(struct ARMCore* cpu, enum PrivilegeMode mode) {
 			cpu->gprs[9] = cpu->bankedRegisters[newFIQBank][3];
 			cpu->gprs[10] = cpu->bankedRegisters[newFIQBank][4];
 			cpu->gprs[11] = cpu->bankedRegisters[newFIQBank][5];
-			cpu->gprs[12] = cpu->bankedRegisters[newFIQBank][6];
+			cpu->gprs[12] = cpu->bankedRegisters[newFIQBank][6];*/
 		}
 		cpu->bankedRegisters[oldBank][0] = cpu->gprs[ARM_SP];
 		cpu->bankedRegisters[oldBank][1] = cpu->gprs[ARM_LR];
@@ -94,11 +95,11 @@ void ARMReset(struct ARMCore* cpu) {
 	for (i = 0; i < 6; ++i) {
 		cpu->bankedRegisters[i][0] = 0;
 		cpu->bankedRegisters[i][1] = 0;
-		cpu->bankedRegisters[i][2] = 0;
+		/*cpu->bankedRegisters[i][2] = 0;
 		cpu->bankedRegisters[i][3] = 0;
 		cpu->bankedRegisters[i][4] = 0;
 		cpu->bankedRegisters[i][5] = 0;
-		cpu->bankedRegisters[i][6] = 0;
+		cpu->bankedRegisters[i][6] = 0;*/
 		cpu->bankedSPSRs[i] = 0;
 	}
 

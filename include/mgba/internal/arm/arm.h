@@ -167,7 +167,8 @@ struct ARMCore {
 	int32_t nextEvent;
 	int halted;
 
-	int32_t bankedRegisters[6][7];
+	//int32_t bankedRegisters[6][7];
+	int32_t bankedRegisters[6][2];
 	int32_t bankedSPSRs[6];
 
 	int32_t shifterOperand;

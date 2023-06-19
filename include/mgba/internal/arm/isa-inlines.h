@@ -85,7 +85,15 @@ static inline void _ARMSetMode(struct ARMCore* cpu, enum ExecutionMode execution
 	}
 
 	cpu->executionMode = executionMode;
-	switch (executionMode) {
+	if (executionMode == MODE_ARM) {
+		cpu->cpsr.t = 0;
+		cpu->memory.activeMask &= ~2;
+	}
+	else {
+		cpu->cpsr.t = 1;
+		cpu->memory.activeMask |= 2;
+	}
+	/*switch (executionMode) {
 	case MODE_ARM:
 		cpu->cpsr.t = 0;
 		cpu->memory.activeMask &= ~2;
@@ -93,7 +101,7 @@ static inline void _ARMSetMode(struct ARMCore* cpu, enum ExecutionMode execution
 	case MODE_THUMB:
 		cpu->cpsr.t = 1;
 		cpu->memory.activeMask |= 2;
-	}
+	}*/
 	cpu->nextEvent = cpu->cycles;
 }
 
@@ -147,7 +155,13 @@ static inline bool ARMTestCondition(struct ARMCore* cpu, unsigned condition) {
 }
 
 static inline enum RegisterBank ARMSelectBank(enum PrivilegeMode mode) {
-	switch (mode) {
+	if (mode==MODE_USER || mode == MODE_SYSTEM)	{return BANK_NONE;}
+	else if (mode == MODE_SUPERVISOR)		{return BANK_SUPERVISOR;}
+	else if (mode == MODE_IRQ)			{return BANK_IRQ;}
+	else if (mode == MODE_FIQ)			{return BANK_FIQ;}
+	else						{return BANK_ABORT;}
+
+/*	switch (mode) {
 	case MODE_USER:
 	case MODE_SYSTEM:
 		// No banked registers
@@ -165,7 +179,7 @@ static inline enum RegisterBank ARMSelectBank(enum PrivilegeMode mode) {
 	default:
 		// This should be unreached
 		return BANK_NONE;
-	}
+	}*/
 }
 
 #endif

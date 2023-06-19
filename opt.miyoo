@@ -10,9 +10,6 @@ LD = $(COM)g++
 
 OBJS = src/version.o     \
      src/gba/core.o     \
-     src/gba/sio/lockstep.o     \
-     src/gba/sio/dolphin.o     \
-     src/gba/sio/joybus.o     \
      src/gba/overrides.o     \
      src/gba/gba.o     \
      src/gba/cheats.o     \
@@ -42,6 +39,7 @@ OBJS = src/version.o     \
      src/gba/extra/proxy.o     \
      src/gba/extra/audio-mixer.o     \
      src/gba/audio.o     \
+     src/gba/gbaudio.o		\
      src/gba/timer.o     \
      src/gba/bios.o     \
      src/gba/sio.o     \
@@ -99,7 +97,6 @@ OBJS = src/version.o     \
      src/feature/video-logger.o     \
      src/feature/thread-proxy.o     \
      src/feature/commandline.o     \
-     src/gb/audio.o		\
      src/platform/sdl/menu.o	\
      src/platform/sdl/main.o   \
      src/platform/sdl/sw-sdl1.o   \

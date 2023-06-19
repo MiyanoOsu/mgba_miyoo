@@ -23,7 +23,11 @@
 	info->nDataCycles = 1;
 
 static inline bool ARMInstructionIsBranch(enum ARMMnemonic mnemonic) {
-	switch (mnemonic) {
+	if (mnemonic == ARM_MN_B || mnemonic == ARM_MN_BL || mnemonic == ARM_MN_BX )
+		return true;
+	else	return false;
+
+	/*switch (mnemonic) {
 		case ARM_MN_B:
 		case ARM_MN_BL:
 		case ARM_MN_BX:
@@ -31,7 +35,7 @@ static inline bool ARMInstructionIsBranch(enum ARMMnemonic mnemonic) {
 			return true;
 		default:
 			return false;
-	}
+	}*/
 }
 
 #endif
