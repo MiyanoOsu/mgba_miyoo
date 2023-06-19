@@ -19,12 +19,12 @@
 	buffer += AMOUNT; \
 	blen -= AMOUNT;
 
-static int _decodeRegister(int reg, char* buffer, int blen);
-static int _decodeRegisterList(int list, char* buffer, int blen);
-static int _decodePSR(int bits, char* buffer, int blen);
-static int _decodePCRelative(uint32_t address, const struct mDebuggerSymbols* symbols, uint32_t pc, bool thumbBranch, char* buffer, int blen);
-static int _decodeMemory(struct ARMMemoryAccess memory, struct ARMCore* cpu, const struct mDebuggerSymbols* symbols, int pc, char* buffer, int blen);
-static int _decodeShift(union ARMOperand operand, bool reg, char* buffer, int blen);
+static uint8_t _decodeRegister(uint8_t reg, char* buffer, int8_t blen);
+static uint8_t _decodeRegisterList(uint8_t list, char* buffer, int8_t blen);
+static uint8_t _decodePSR(uint8_t bits, char* buffer, int8_t blen);
+static uint8_t _decodePCRelative(uint32_t address, const struct mDebuggerSymbols* symbols, uint32_t pc, bool thumbBranch, char* buffer, int8_t blen);
+static uint8_t _decodeMemory(struct ARMMemoryAccess memory, struct ARMCore* cpu, const struct mDebuggerSymbols* symbols, int pc, char* buffer, uint8_t blen);
+static uint8_t _decodeShift(union ARMOperand operand, bool reg, char* buffer, int8_t blen);
 
 static const char* _armConditions[] = {
 	"eq",
@@ -45,7 +45,7 @@ static const char* _armConditions[] = {
 	"nv"
 };
 
-static int _decodeRegister(int reg, char* buffer, int blen) {
+static uint8_t _decodeRegister(uint8_t reg, char* buffer, int8_t blen) {
 	switch (reg) {
 	case ARM_SP:
 		strlcpy(buffer, "sp", blen);
@@ -67,17 +67,17 @@ static int _decodeRegister(int reg, char* buffer, int blen) {
 	}
 }
 
-static int _decodeRegisterList(int list, char* buffer, int blen) {
+static uint8_t _decodeRegisterList(uint8_t list, char* buffer, int8_t blen) {
 	if (blen <= 0) {
 		return 0;
 	}
-	int total = 0;
+	uint8_t total = 0;
 	strlcpy(buffer, "{", blen);
 	ADVANCE(1);
-	int i;
-	int start = -1;
-	int end = -1;
-	int written;
+	uint8_t i;
+	int8_t start = -1;
+	int8_t end = -1;
+	uint8_t written;
 	for (i = 0; i <= ARM_PC; ++i) {
 		if (list & 1) {
 			if (start < 0) {
@@ -117,11 +117,11 @@ static int _decodeRegisterList(int list, char* buffer, int blen) {
 	return total;
 }
 
-static int _decodePSR(int psrBits, char* buffer, int blen) {
+static uint8_t _decodePSR(uint8_t psrBits, char* buffer, int8_t blen) {
 	if (!psrBits) {
 		return 0;
 	}
-	int total = 0;
+	uint8_t total = 0;
 	strlcpy(buffer, "_", blen);
 	ADVANCE(1);
 	if (psrBits & ARM_PSR_C) {
@@ -143,7 +143,7 @@ static int _decodePSR(int psrBits, char* buffer, int blen) {
 	return total;
 }
 
-static int _decodePCRelative(uint32_t address, const struct mDebuggerSymbols* symbols, uint32_t pc, bool thumbBranch, char* buffer, int blen) {
+static uint8_t _decodePCRelative(uint32_t address, const struct mDebuggerSymbols* symbols, uint32_t pc, bool thumbBranch, char* buffer, int8_t blen) {
 	address += pc;
 	const char* label = NULL;
 	if (symbols) {
@@ -159,14 +159,14 @@ static int _decodePCRelative(uint32_t address, const struct mDebuggerSymbols* sy
 	}
 }
 
-static int _decodeMemory(struct ARMMemoryAccess memory, struct ARMCore* cpu, const struct mDebuggerSymbols* symbols, int pc, char* buffer, int blen) {
+static uint8_t _decodeMemory(struct ARMMemoryAccess memory, struct ARMCore* cpu, const struct mDebuggerSymbols* symbols, int pc, char* buffer, int8_t blen) {
 	if (blen <= 1) {
 		return 0;
 	}
-	int total = 0;
+	uint8_t total = 0;
 	bool elideClose = false;
 	char comment[64];
-	int written;
+	uint8_t written;
 	comment[0] = '\0';
 	if (memory.format & ARM_MEMORY_REGISTER_BASE) {
 		if (memory.baseReg == ARM_PC && memory.format & ARM_MEMORY_IMMEDIATE_OFFSET) {
@@ -258,14 +258,14 @@ static int _decodeMemory(struct ARMMemoryAccess memory, struct ARMCore* cpu, con
 	return total;
 }
 
-static int _decodeShift(union ARMOperand op, bool reg, char* buffer, int blen) {
+static uint8_t _decodeShift(union ARMOperand op, bool reg, char* buffer, int8_t blen) {
 	if (blen <= 1) {
 		return 0;
 	}
-	int total = 0;
+	uint8_t total = 0;
 	strlcpy(buffer, ", ", blen);
 	ADVANCE(2);
-	int written;
+	uint8_t written;
 	switch (op.shifterOp) {
 	case ARM_SHIFT_LSL:
 		strlcpy(buffer, "lsl ", blen);

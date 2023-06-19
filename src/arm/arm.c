@@ -20,7 +20,6 @@ void ARMSetPrivilegeMode(struct ARMCore* cpu, enum PrivilegeMode mode) {
 	if (newBank != oldBank) {
 		// Switch banked registers
 		if (mode == MODE_FIQ || cpu->privilegeMode == MODE_FIQ) {
-			int oldBank = newBank == BANK_FIQ;
 			/*int oldFIQBank = oldBank == BANK_FIQ;
 			int newFIQBank = newBank == BANK_FIQ;
 			cpu->bankedRegisters[oldFIQBank][2] = cpu->gprs[8];
@@ -33,10 +32,14 @@ void ARMSetPrivilegeMode(struct ARMCore* cpu, enum PrivilegeMode mode) {
 			cpu->gprs[10] = cpu->bankedRegisters[newFIQBank][4];
 			cpu->gprs[11] = cpu->bankedRegisters[newFIQBank][5];
 			cpu->gprs[12] = cpu->bankedRegisters[newFIQBank][6];*/
+		cpu->privilegeMode = mode;
+		return; 
 		}
+
 		cpu->bankedRegisters[oldBank][0] = cpu->gprs[ARM_SP];
-		cpu->bankedRegisters[oldBank][1] = cpu->gprs[ARM_LR];
 		cpu->gprs[ARM_SP] = cpu->bankedRegisters[newBank][0];
+
+		cpu->bankedRegisters[oldBank][1] = cpu->gprs[ARM_LR];
 		cpu->gprs[ARM_LR] = cpu->bankedRegisters[newBank][1];
 
 		cpu->bankedSPSRs[oldBank] = cpu->spsr.packed;
@@ -88,7 +91,7 @@ void ARMHotplugDetach(struct ARMCore* cpu, size_t slot) {
 }
 
 void ARMReset(struct ARMCore* cpu) {
-	int i;
+	uint8_t i;
 	for (i = 0; i < 16; ++i) {
 		cpu->gprs[i] = 0;
 	}
@@ -96,7 +99,7 @@ void ARMReset(struct ARMCore* cpu) {
 		cpu->bankedRegisters[i][0] = 0;
 		cpu->bankedRegisters[i][1] = 0;
 		/*cpu->bankedRegisters[i][2] = 0;
-		cpu->bankedRegisters[i][3] = 0;
+			cpu->bankedRegisters[i][3] = 0;
 		cpu->bankedRegisters[i][4] = 0;
 		cpu->bankedRegisters[i][5] = 0;
 		cpu->bankedRegisters[i][6] = 0;*/
@@ -126,7 +129,7 @@ void ARMRaiseIRQ(struct ARMCore* cpu) {
 		return;
 	}
 	union PSR cpsr = cpu->cpsr;
-	int instructionWidth;
+	uint8_t instructionWidth;
 	if (cpu->executionMode == MODE_THUMB) {
 		instructionWidth = WORD_SIZE_THUMB;
 	} else {
@@ -145,7 +148,7 @@ void ARMRaiseIRQ(struct ARMCore* cpu) {
 
 void ARMRaiseSWI(struct ARMCore* cpu) {
 	union PSR cpsr = cpu->cpsr;
-	int instructionWidth;
+	uint8_t instructionWidth;
 	if (cpu->executionMode == MODE_THUMB) {
 		instructionWidth = WORD_SIZE_THUMB;
 	} else {
@@ -163,7 +166,7 @@ void ARMRaiseSWI(struct ARMCore* cpu) {
 
 void ARMRaiseUndefined(struct ARMCore* cpu) {
 	union PSR cpsr = cpu->cpsr;
-	int instructionWidth;
+	uint8_t instructionWidth;
 	if (cpu->executionMode == MODE_THUMB) {
 		instructionWidth = WORD_SIZE_THUMB;
 	} else {
