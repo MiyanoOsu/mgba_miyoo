@@ -2,9 +2,9 @@
 #include "sdl-events.h"
 
 
-static int g_dirty = 1;
+static int8_t g_dirty = 1;
 static unsigned long g_key = 0, last_key;
-static int counter = 0;
+static int8_t counter = 0;
 SDL_Surface *screen;
 
 void readkey() 
@@ -72,7 +72,7 @@ void drawText (SDL_Surface* screen, char* string, int x, int y)
 }
 
 
-char *menu[] = {"Resume","Save state","Load state","Screenshot","Exit"};
+char *menu[] = {"Resume","Reset","Save state","Load state","Screenshot","Exit"};
 char *slot[] = {"Slot 1","Slot 2","Slot 3","Slot 4","Slot 5","Slot 6","Slot 7","Slot 8","Slot 9"};
 
 
@@ -92,7 +92,7 @@ void RunMenu(struct mCoreThread* context) {
 		
 		if(g_dirty){
 			SDL_FillRect(screen, NULL, SDL_MapRGB(screen->format, 0, 20, 80));
-			if (sel==1 || sel==2) {
+			if (sel==2 || sel==3) {
 				if(parsekey(SDLK_LCTRL,0)) {sel=-1;index=0;}
 				if(parsekey(SDLK_UP,0)) index-=1;
 				if(parsekey(SDLK_DOWN,0)) index+=1;
@@ -111,8 +111,8 @@ void RunMenu(struct mCoreThread* context) {
 					case 7:
 					case 8:
 						mCoreThreadInterrupt(context);
-						if(sel==1) {mCoreSaveState(context->core, sl + 1, SAVESTATE_SAVEDATA | SAVESTATE_SCREENSHOT | SAVESTATE_RTC);sl=-1;}
-						if(sel==2) {mCoreLoadState(context->core, sl + 1, SAVESTATE_SCREENSHOT | SAVESTATE_RTC);sl=-1;}
+						if(sel==2) {mCoreSaveState(context->core, sl + 1, SAVESTATE_SAVEDATA | SAVESTATE_SCREENSHOT | SAVESTATE_RTC);sl=-1;}
+						if(sel==3) {mCoreLoadState(context->core, sl + 1, SAVESTATE_SCREENSHOT | SAVESTATE_RTC);sl=-1;}
 						mCoreThreadContinue(context);mCoreThreadUnpause(context);sel=-1;i=0;
 						break;
 				}
@@ -126,13 +126,14 @@ void RunMenu(struct mCoreThread* context) {
 				if(parsekey(SDLK_UP,0)) index-=1;
 				if(parsekey(SDLK_DOWN,0)) index+=1;
 				if(parsekey(SDLK_LALT,0)) {sel=index;index=0;}
-				if(index < 0) index=4;
-				if(index >4) index=0;
+				if(index < 0) index=5;
+				if(index > 5) index=0;
 				if (sel==0) {mCoreThreadUnpause(context);sel=-1;break;}
-				if (sel==4) {mCoreThreadEnd(context);break;}
-				if (sel==3) {mCoreTakeScreenshot(context->core);sel=-1;}
+				if (sel==5) {mCoreThreadEnd(context);break;}
+				if (sel==4) {mCoreTakeScreenshot(context->core);mCoreThreadUnpause(context);sel=-1;break;}
+				if (sel==1) {mCoreThreadReset(context);mCoreThreadUnpause(context);sel=-1;break;}
 
-				for(j=0,k=76;j<5;j++,k+=18) {drawText(screen, menu[j],60,k);}
+				for(j=0,k=76;j<6;j++,k+=18) {drawText(screen, menu[j],60,k);}
 				drawText(screen,"*",50,index*18+76);
 			}
 
