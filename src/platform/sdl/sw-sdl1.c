@@ -50,7 +50,7 @@ bool mSDLSWInit(struct mSDLRenderer* renderer) {
 		pixman_format_code_t format = PIXMAN_x8b8g8r8;
 #endif
 		renderer->pix = pixman_image_create_bits(format, width, height,
-		    renderer->outputBuffer, width * BYTES_PER_PIXEL);
+		   (uint32_t *) renderer->outputBuffer, width * BYTES_PER_PIXEL);
 		renderer->screenpix = pixman_image_create_bits(format, renderer->viewportWidth, renderer->viewportHeight, surface->pixels, surface->pitch);
 
 		pixman_transform_t transform;
@@ -65,6 +65,19 @@ bool mSDLSWInit(struct mSDLRenderer* renderer) {
 
 	return true;
 }
+void lock_fps(uint8_t fps)
+{
+    static uint32_t lastTicks = 0; 
+    uint32_t currentTicks = SDL_GetTicks();
+    uint32_t targetTicks = 1000 / fps;
+    uint32_t elapsedTicks = currentTicks - lastTicks;
+    if (elapsedTicks < targetTicks) {
+        SDL_Delay(targetTicks - elapsedTicks);
+    }
+
+    lastTicks = SDL_GetTicks(); 
+}
+
 
 void mSDLSWRunloop(struct mSDLRenderer* renderer, void* user) {
 	struct mCoreThread* context = user;
@@ -91,7 +104,9 @@ void mSDLSWRunloop(struct mSDLRenderer* renderer, void* user) {
 			SDL_UnlockSurface(surface);
 			SDL_Flip(surface);
 			SDL_LockSurface(surface);
+			lock_fps(60);
 		}
+		
 		mCoreSyncWaitFrameEnd(&context->impl->sync);
 	}
 }
